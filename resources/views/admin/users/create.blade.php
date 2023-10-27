@@ -24,8 +24,13 @@
 
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" value="" class="form-control" placeholder="Name">
+                                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Name">
                                 <x-error name="name" />
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
+                                <x-error name="email" />
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Save">

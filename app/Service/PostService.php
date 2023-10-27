@@ -26,7 +26,7 @@ class PostService
                 $data['main_image'] = Storage::put('/images', $data['main_image']);
             }
 
-            $post = Post::firstOrCreate($data);
+            $post = Post::create($data);
 
             if (isset($tagIds)) {
                 $post->tags()->attach($tagIds);

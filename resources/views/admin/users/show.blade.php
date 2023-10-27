@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 @extends('admin/layouts/main')
 
 @section('content')
@@ -11,8 +15,8 @@
                     </div>
                 </div>
 
-                <x-topsuccess />
-                <x-toperrors />
+                <x-topsuccess/>
+                <x-toperrors/>
             </div>
         </div>
 
@@ -24,14 +28,30 @@
                             <div class="card-header table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <tbody>
-                                        <tr>
-                                            <td>ID</td>
-                                            <td>{{ $user->id }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>{{ $user->name }}</td>
-                                        </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <td>{{ $user->id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{{ $user->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ $user->email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Created date</th>
+                                        <td>
+                                            {{ Carbon::parse($user->created_at)->format('j F Y, H:i:s') }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Updated date</th>
+                                        <td>
+                                            {{ Carbon::parse($user->updated_at)->format('j F Y, H:i:s') }}
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

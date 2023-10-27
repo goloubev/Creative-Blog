@@ -26,26 +26,26 @@
                                 <table class="table table-hover text-nowrap">
                                     <tbody>
                                         <tr>
-                                            <td>ID</td>
+                                            <th>ID</th>
                                             <td>{{ $post->id }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Title</td>
+                                            <th>Title</th>
                                             <td>{{ $post->title }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Content</td>
+                                            <th>Content</th>
                                             <td>{!! $post->content !!}</td>
                                         </tr>
                                         <tr>
-                                            <td>Category</td>
+                                            <th>Category</th>
                                             <td>
                                                 {{--{{ $categories[$post->category_id]->title }}--}}
                                                 {{ $post->category_id }}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Preview image</td>
+                                            <th>Preview image</th>
                                             <td>
                                                 @if($post->preview_image != null && Storage::exists($post->preview_image))
                                                     <img src="{{ Storage::url($post->preview_image) }}" style="height:60px;" alt="" />
@@ -55,7 +55,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Main image</td>
+                                            <th>Main image</th>
                                             <td>
                                                 @if($post->main_image != null && Storage::exists($post->main_image))
                                                     <img src="{{ Storage::url($post->main_image) }}" style="height:60px;" alt="" />

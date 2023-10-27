@@ -13,6 +13,6 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
         $tag->update($data);
-        return redirect()->route('admin.tag.show', $tag->id)->with('success', 'Successfully updated');
+        return redirect()->route('admin.tag.show', $tag)->with('success', 'Successfully updated');
     }
 }

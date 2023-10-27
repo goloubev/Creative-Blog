@@ -24,7 +24,7 @@
 
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" value="" class="form-control" placeholder="Title">
+                                <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title">
                                 <x-error name="title" />
                             </div>
                             <div class="form-group">

@@ -29,6 +29,11 @@
                                 <x-error name="name" />
                             </div>
                             <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" name="email" value="{{ $user->email }}" class="form-control" placeholder="Email">
+                                <x-error name="email" />
+                            </div>
+                            <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Save">
                             </div>
                         </form>

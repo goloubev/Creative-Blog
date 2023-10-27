@@ -38,28 +38,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $user)
-                                            <tr>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>
-                                                    <a href="{{ route('admin.user.show', ['user' => $user->id]) }}"><i class="fas fa-eye"></i></a>
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('admin.user.edit', ['user' => $user->id]) }}"><i class="fas fa-edit"></i></a>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('admin.user.delete', ['user' => $user->id]) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
+                                        @if(count($users) > 0)
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ $user->id }}</td>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.user.show', ['user' => $user->id]) }}"><i class="fas fa-eye"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('admin.user.edit', ['user' => $user->id]) }}"><i class="fas fa-edit"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('admin.user.delete', ['user' => $user->id]) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
 
-                                                        <button type="submit" class="border-0 bg-transparent">
-                                                            <i class="fas fa-trash text-danger" role="button"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                                            <button type="submit" class="border-0 bg-transparent">
+                                                                <i class="fas fa-trash text-danger" role="button"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="10">No data</td>
                                             </tr>
-                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

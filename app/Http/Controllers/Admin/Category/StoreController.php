@@ -13,6 +13,7 @@ class StoreController extends Controller
     {
         $data = $request->validated();
         $categoryId = Category::create($data);
+
         return redirect()->route('admin.category.show', $categoryId)->with('success', 'Successfully created');
     }
 }

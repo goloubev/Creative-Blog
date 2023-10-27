@@ -11,6 +11,7 @@ class DeleteController extends Controller
     public function index(User $user): RedirectResponse
     {
         $user->delete();
+
         return redirect()->route('admin.user.index')->with('success', 'Successfully deleted');
     }
 }

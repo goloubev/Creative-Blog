@@ -13,13 +13,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        Tag::factory(10)->create();
+
         for ($i = 0; $i < 5; $i++) {
             Post::factory(3)->create([
                 'category_id' => Category::factory()->create()->id,
             ]);
         }
 
-        Tag::factory(10)->create();
 
         /*User::factory(10)->create();
 

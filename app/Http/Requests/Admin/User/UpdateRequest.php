@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Category;
+namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,7 +23,18 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'min:3', 'max:250'],
+            'name' => ['required', 'string'],
+            //'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'email' => ['required', 'string', 'email'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'NAME is required',
+            'email.required' => 'EMAIL is required',
+            'email.email' => 'EMAIL must be a valid email',
         ];
     }
 }

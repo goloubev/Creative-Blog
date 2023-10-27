@@ -25,11 +25,11 @@
                                 <table class="table table-hover text-nowrap">
                                     <tbody>
                                         <tr>
-                                            <td>ID</td>
+                                            <th>ID</th>
                                             <td>{{ $category->id }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Title</td>
+                                            <th>Title</th>
                                             <td>{{ $category->title }}</td>
                                         </tr>
                                     </tbody>
