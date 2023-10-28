@@ -1,3 +1,7 @@
+@php
+    use App\Models\Category;
+@endphp
+
 @extends('admin/layouts/main')
 
 @section('content')
@@ -32,6 +36,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Title</th>
+                                            <th>Category</th>
                                             <th>View</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
@@ -43,6 +48,7 @@
                                                 <tr>
                                                     <td>{{ $post->id }}</td>
                                                     <td>{{ $post->title }}</td>
+                                                    <td>{{ Category::getCategoryName($post->category_id) }}</td>
                                                     <td>
                                                         <a href="{{ route('admin.post.show', ['post' => $post->id]) }}"><i class="fas fa-eye"></i></a>
                                                     </td>
