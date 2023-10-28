@@ -8,3 +8,10 @@
         </ul>
     </div>
 @endif
+
+@if (session()->has('error'))
+    <div class="alert alert-danger">
+        <h5><i class="icon fas fa-check"></i> Error!</h5>
+        {{ session('error') }}
+    </div>
+@endif

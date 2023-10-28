@@ -7,12 +7,12 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class ReaderMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // Not admin
-        if (auth()->user()->role != User::ROLE_ADMIN) {
+        // Not reader
+        if (auth()->user()->role != User::ROLE_READER) {
             return back()->with('error', 'Access denied');
         }
 
