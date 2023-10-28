@@ -26,7 +26,9 @@ class StoreController extends Controller
             'email' => $data['email'],
             'password' => $password,
         ];
+
         // Send email with new password
+        // PasswordMail : implements ShouldQueue
         Mail::to($data['email'], $data['name'])->send(new PasswordMail($userData));
 
         // Send account verification email
