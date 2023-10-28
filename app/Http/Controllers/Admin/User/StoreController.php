@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Mail\User\PasswordMail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -18,15 +19,19 @@ class StoreController extends Controller
         $data = $request->validated();
         $password = Str::random(10);
         $data['password'] = Hash::make($password);
-        $userId = User::create($data);
+        $user = User::create($data);
 
         $userData = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $password,
         ];
+        // Send email with new password
         Mail::to($data['email'], $data['name'])->send(new PasswordMail($userData));
 
-        return redirect()->route('admin.user.show', $userId)->with('success', 'Successfully created');
+        // Send account verification email
+        event(new Registered($user));
+
+        return redirect()->route('admin.user.show', $user)->with('success', 'Successfully created');
     }
 }

@@ -1,3 +1,7 @@
+@php
+    use App\Models\User;
+@endphp
+
 @extends('admin/layouts/main')
 
 @section('content')
@@ -32,6 +36,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
+                                            <th>Role</th>
                                             <th>View</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
@@ -43,6 +48,7 @@
                                                 <tr>
                                                     <td>{{ $user->id }}</td>
                                                     <td>{{ $user->name }}</td>
+                                                    <td>{{ User::getRole($user->role) }}</td>
                                                     <td>
                                                         <a href="{{ route('admin.user.show', ['user' => $user->id]) }}"><i class="fas fa-eye"></i></a>
                                                     </td>
