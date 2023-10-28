@@ -1,5 +1,5 @@
 @php
-    use Carbon\Carbon;
+    use App\Models\User;use Carbon\Carbon;
 @endphp
 
 @extends('admin/layouts/main')
@@ -39,6 +39,10 @@
                                     <tr>
                                         <th>Email</th>
                                         <td>{{ $user->email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Role</th>
+                                        <td>{{ User::getRole($user->role) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Created date</th>

@@ -12,8 +12,11 @@ class EditController extends Controller
 {
     public function index(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $roles = User::getRoles();
+
         return view('admin/users/edit', [
-            'user' => $user
+            'user' => $user,
+            'roles' => $roles,
         ]);
     }
 }

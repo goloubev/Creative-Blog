@@ -33,6 +33,20 @@
                                 <x-error name="email" />
                             </div>
                             <div class="form-group">
+                                <label>Role</label>
+                                <select name="role" class="form-control select2" style="width:100%;">
+                                    <option value="">Select...</option>
+
+                                    @foreach($roles as $role_id => $role_name)
+                                        <option
+                                            value="{{ $role_id }}"
+                                            {{ $role_id == old('role') ? 'selected' : '' }}
+                                        >{{ $role_name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-error name="role" />
+                            </div>
+                            <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Save">
                             </div>
                         </form>

@@ -13,7 +13,7 @@ class StoreController extends Controller
     public function index(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data['password'] = Hash::make('test');
+        $data['password'] = Hash::make('aaaaaaaa');
         $userId = User::create($data);
 
         return redirect()->route('admin.user.show', $userId)->with('success', 'Successfully created');
