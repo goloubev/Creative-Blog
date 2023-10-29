@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personal\Comments;
+namespace App\Http\Controllers\Personal\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;

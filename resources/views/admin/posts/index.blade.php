@@ -50,15 +50,14 @@
                                                     <td>{{ $post->title }}</td>
                                                     <td>{{ Category::getCategoryName($post->category_id) }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.post.show', ['post' => $post->id]) }}"><i class="fas fa-eye"></i></a>
+                                                        <a href="{{ route('admin.post.show', ['post' => $post]) }}"><i class="fas fa-eye"></i></a>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.post.edit', ['post' => $post->id]) }}"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{ route('admin.post.edit', ['post' => $post]) }}"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('admin.post.delete', ['post' => $post->id]) }}" method="post">
+                                                        <form action="{{ route('admin.post.delete', ['post' => $post]) }}" method="post">
                                                             @csrf
-                                                            @method('DELETE')
 
                                                             <button type="submit" class="border-0 bg-transparent">
                                                                 <i class="fas fa-trash text-danger" role="button"></i>

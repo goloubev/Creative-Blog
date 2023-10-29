@@ -23,8 +23,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'min:3', 'max:250'],
-            'content' => ['required', 'min:3'],
+            'title' => ['required', 'string', 'min:3', 'max:250'],
+            'content' => ['required', 'string', 'min:3'],
             'preview_image' => ['file'],
             'main_image' => ['file'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],

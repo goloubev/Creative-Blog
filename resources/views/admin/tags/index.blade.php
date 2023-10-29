@@ -44,15 +44,14 @@
                                                     <td>{{ $tag->id }}</td>
                                                     <td>{{ $tag->title }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.tag.show', ['tag' => $tag->id]) }}"><i class="fas fa-eye"></i></a>
+                                                        <a href="{{ route('admin.tag.show', ['tag' => $tag]) }}"><i class="fas fa-eye"></i></a>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.tag.edit', ['tag' => $tag->id]) }}"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{ route('admin.tag.edit', ['tag' => $tag]) }}"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('admin.tag.delete', ['tag' => $tag->id]) }}" method="post">
+                                                        <form action="{{ route('admin.tag.delete', ['tag' => $tag]) }}" method="post">
                                                             @csrf
-                                                            @method('DELETE')
 
                                                             <button type="submit" class="border-0 bg-transparent">
                                                                 <i class="fas fa-trash text-danger" role="button"></i>

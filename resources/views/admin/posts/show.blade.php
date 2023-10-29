@@ -8,7 +8,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6 d-flex align-items-center">
                         <h1 class="m-0 mr-5">Post: {{ $post->title }}</h1>
-                        <a href="{{ route('admin.post.edit', $post->id) }}"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('admin.post.edit', $post) }}"><i class="fas fa-edit"></i></a>
                     </div>
                 </div>
 

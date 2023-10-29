@@ -19,9 +19,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
-                        <form action="{{ route('admin.tag.update', $tag->id) }}" name="form" id="form" method="post" class="pl-2">
+                        <form action="{{ route('admin.tag.update', $tag) }}" name="form" id="form" method="post" class="pl-2">
                             @csrf
-                            @method('PATCH')
 
                             <div class="form-group">
                                 <label>Title</label>

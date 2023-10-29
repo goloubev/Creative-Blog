@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personal\Comments;
+namespace App\Http\Controllers\Personal\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
@@ -11,8 +11,6 @@ class DeleteController extends Controller
 {
     public function index(Comment $comment): RedirectResponse
     {
-        $comment->delete();
-
         /*// auth() - get users ID
         // user() - get user data
         if (!empty(auth()->user()->id)) {
@@ -24,6 +22,8 @@ class DeleteController extends Controller
                 ->delete();
         }*/
 
-        return redirect()->route('personal.comments.index');
+        $comment->delete();
+
+        return redirect()->route('personal.comment.index')->with('success', 'Successfully deleted');
     }
 }

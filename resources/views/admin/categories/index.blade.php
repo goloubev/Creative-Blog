@@ -44,15 +44,14 @@
                                                     <td>{{ $category->id }}</td>
                                                     <td>{{ $category->title }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.category.show', ['category' => $category->id]) }}"><i class="fas fa-eye"></i></a>
+                                                        <a href="{{ route('admin.category.show', ['category' => $category]) }}"><i class="fas fa-eye"></i></a>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.category.edit', ['category' => $category->id]) }}"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{ route('admin.category.edit', ['category' => $category]) }}"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('admin.category.delete', ['category' => $category->id]) }}" method="post">
+                                                        <form action="{{ route('admin.category.delete', ['category' => $category]) }}" method="post">
                                                             @csrf
-                                                            @method('DELETE')
 
                                                             <button type="submit" class="border-0 bg-transparent">
                                                                 <i class="fas fa-trash text-danger" role="button"></i>

@@ -9,6 +9,9 @@
                         <h1 class="m-0">Liked posts</h1>
                     </div>
                 </div>
+
+                <x-topsuccess />
+                <x-toperrors />
             </div>
         </div>
 
@@ -22,7 +25,6 @@
                                     <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>View</th>
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
@@ -32,12 +34,8 @@
                                                 <tr>
                                                     <td>{{ $post->title }}</td>
                                                     <td>
-                                                        <a href="{{--{{ route('admin.post.show', ['post' => $post->id]) }}--}}"><i class="fas fa-eye"></i></a>
-                                                    </td>
-                                                    <td>
                                                         <form action="{{ route('personal.liked.delete', ['post' => $post->id]) }}" method="post">
                                                             @csrf
-                                                            @method('DELETE')
 
                                                             <button type="submit" class="border-0 bg-transparent">
                                                                 <i class="fas fa-trash text-danger" role="button"></i>

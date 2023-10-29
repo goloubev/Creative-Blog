@@ -21,17 +21,26 @@ Route::group(['namespace' => 'Personal', 'prefix' => 'personal', 'middleware' =>
             ->name('personal.main.index');
     });
 
-    Route::group(['namespace' => 'Liked'], function() {
-        Route::get('/liked', [App\Http\Controllers\Personal\Liked\IndexController::class, 'index'])
+    Route::group(['namespace' => 'Liked', 'prefix' => 'liked'], function() {
+        Route::get('/', [App\Http\Controllers\Personal\Liked\IndexController::class, 'index'])
             ->name('personal.liked.index');
 
-        Route::delete('/liked/delete/{post}', [App\Http\Controllers\Personal\Liked\DeleteController::class, 'index'])
+        Route::post('/delete/{post}', [App\Http\Controllers\Personal\Liked\DeleteController::class, 'index'])
             ->name('personal.liked.delete');
     });
 
-    Route::group(['namespace' => 'Comments'], function() {
-        Route::get('/comments', [App\Http\Controllers\Personal\Comments\IndexController::class, 'index'])
-            ->name('personal.comments.index');
+    Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function() {
+        Route::get('/', [App\Http\Controllers\Personal\Comment\IndexController::class, 'index'])
+            ->name('personal.comment.index');
+
+        Route::get('/edit/{comment}', [App\Http\Controllers\Personal\Comment\EditController::class, 'index'])
+            ->name('personal.comment.edit');
+
+        Route::post('/update/{comment}', [App\Http\Controllers\Personal\Comment\UpdateController::class, 'index'])
+            ->name('personal.comment.update');
+
+        Route::post('/delete/{comment}', [App\Http\Controllers\Personal\Comment\DeleteController::class, 'index'])
+            ->name('personal.comment.delete');
     });
 });
 
@@ -63,21 +72,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
             ->name('admin.user.store');
 
         // Show user
-        Route::get('/{user}/view', [App\Http\Controllers\Admin\User\ShowController::class, 'index'])
+        Route::get('/view/{user}', [App\Http\Controllers\Admin\User\ShowController::class, 'index'])
             ->name('admin.user.show');
 
         // Edit user
-        Route::get('/{user}/edit', [App\Http\Controllers\Admin\User\EditController::class, 'index'])
+        Route::get('/edit/{user}', [App\Http\Controllers\Admin\User\EditController::class, 'index'])
             ->middleware('admin')
             ->name('admin.user.edit');
 
         // Save existing user
-        Route::patch('/{user}/save', [App\Http\Controllers\Admin\User\UpdateController::class, 'index'])
+        Route::post('/save/{user}', [App\Http\Controllers\Admin\User\UpdateController::class, 'index'])
             ->middleware('admin')
             ->name('admin.user.update');
 
         // Delete existing user
-        Route::delete('/{user}/delete', [App\Http\Controllers\Admin\User\DeleteController::class, 'index'])
+        Route::post('/delete/{user}', [App\Http\Controllers\Admin\User\DeleteController::class, 'index'])
             ->middleware('admin')
             ->name('admin.user.delete');
     });
@@ -101,21 +110,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
             ->name('admin.post.store');
 
         // Show post
-        Route::get('/{post}/view', [App\Http\Controllers\Admin\Post\ShowController::class, 'index'])
+        Route::get('/view/{post}', [App\Http\Controllers\Admin\Post\ShowController::class, 'index'])
             ->name('admin.post.show');
 
         // Edit post
-        Route::get('/{post}/edit', [App\Http\Controllers\Admin\Post\EditController::class, 'index'])
+        Route::get('/edit/{post}', [App\Http\Controllers\Admin\Post\EditController::class, 'index'])
             ->middleware('admin')
             ->name('admin.post.edit');
 
         // Save existing post
-        Route::patch('/{post}/save', [App\Http\Controllers\Admin\Post\UpdateController::class, 'index'])
+        Route::post('/save/{post}', [App\Http\Controllers\Admin\Post\UpdateController::class, 'index'])
             ->middleware('admin')
             ->name('admin.post.update');
 
         // Delete existing post
-        Route::delete('/{post}/delete', [App\Http\Controllers\Admin\Post\DeleteController::class, 'index'])
+        Route::post('/delete/{post}', [App\Http\Controllers\Admin\Post\DeleteController::class, 'index'])
             ->middleware('admin')
             ->name('admin.post.delete');
     });
@@ -139,21 +148,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
             ->name('admin.category.store');
 
         // Show category
-        Route::get('/{category}/view', [App\Http\Controllers\Admin\Category\ShowController::class, 'index'])
+        Route::get('/view/{category}', [App\Http\Controllers\Admin\Category\ShowController::class, 'index'])
             ->name('admin.category.show');
 
         // Edit category
-        Route::get('/{category}/edit', [App\Http\Controllers\Admin\Category\EditController::class, 'index'])
+        Route::get('/edit/{category}', [App\Http\Controllers\Admin\Category\EditController::class, 'index'])
             ->middleware('admin')
             ->name('admin.category.edit');
 
         // Save existing category
-        Route::patch('/{category}/save', [App\Http\Controllers\Admin\Category\UpdateController::class, 'index'])
+        Route::post('/save/{category}', [App\Http\Controllers\Admin\Category\UpdateController::class, 'index'])
             ->middleware('admin')
             ->name('admin.category.update');
 
         // Delete existing category
-        Route::delete('/{category}/delete', [App\Http\Controllers\Admin\Category\DeleteController::class, 'index'])
+        Route::post('/delete/{category}', [App\Http\Controllers\Admin\Category\DeleteController::class, 'index'])
             ->middleware('admin')
             ->name('admin.category.delete');
     });
@@ -177,21 +186,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
             ->name('admin.tag.store');
 
         // Show tag
-        Route::get('/{tag}/view', [App\Http\Controllers\Admin\Tag\ShowController::class, 'index'])
+        Route::get('/view/{tag}', [App\Http\Controllers\Admin\Tag\ShowController::class, 'index'])
             ->name('admin.tag.show');
 
         // Edit tag
-        Route::get('/{tag}/edit', [App\Http\Controllers\Admin\Tag\EditController::class, 'index'])
+        Route::get('/edit/{tag}', [App\Http\Controllers\Admin\Tag\EditController::class, 'index'])
             ->middleware('admin')
             ->name('admin.tag.edit');
 
         // Save existing tag
-        Route::patch('/{tag}/save', [App\Http\Controllers\Admin\Tag\UpdateController::class, 'index'])
+        Route::post('/save/{tag}', [App\Http\Controllers\Admin\Tag\UpdateController::class, 'index'])
             ->middleware('admin')
             ->name('admin.tag.update');
 
         // Delete existing tag
-        Route::delete('/{tag}/delete', [App\Http\Controllers\Admin\Tag\DeleteController::class, 'index'])
+        Route::post('/delete/{tag}', [App\Http\Controllers\Admin\Tag\DeleteController::class, 'index'])
             ->middleware('admin')
             ->name('admin.tag.delete');
     });

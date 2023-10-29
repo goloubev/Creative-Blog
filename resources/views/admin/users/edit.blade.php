@@ -19,9 +19,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
-                        <form action="{{ route('admin.user.update', $user->id) }}" name="form" id="form" method="post" class="pl-2">
+                        <form action="{{ route('admin.user.update', $user) }}" name="form" id="form" method="post" class="pl-2">
                             @csrf
-                            @method('PATCH')
 
                             <div class="form-group">
                                 <label>Name</label>

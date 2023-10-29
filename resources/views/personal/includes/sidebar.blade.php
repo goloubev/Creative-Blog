@@ -8,13 +8,19 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.main.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Admin</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('personal.liked.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-heart"></i>
                     <p>Liked posts</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('personal.comments.index') }}" class="nav-link">
+                <a href="{{ route('personal.comment.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-comment"></i>
                     <p>Comments</p>
                 </a>
