@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Personal\Liked;
+namespace App\Http\Controllers\Personal\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class DeleteController extends Controller
 {
-    public function index(Post $post): RedirectResponse
+    public function index(Comment $comment): RedirectResponse
     {
-        // auth() - get users ID
+        $comment->delete();
+
+        /*// auth() - get users ID
         // user() - get user data
         if (!empty(auth()->user()->id)) {
             $userId = auth()->user()->id;
 
-            DB::table('user_post_likes')
+            DB::table('comments')
+                ->where('id', $comment->id)
                 ->where('user_id', $userId)
-                ->where('post_id', $post->id)
                 ->delete();
-        }
+        }*/
 
-        return redirect()->route('personal.liked.index');
+        return redirect()->route('personal.comments.index');
     }
 }
