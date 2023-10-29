@@ -30,6 +30,12 @@ class Post extends Model
         // From POSTS to TAGS
         // Table: post_tags
         // post_id -> tag_id
-        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
+        $result = $this->belongsToMany(
+            Tag::class,
+            'post_tags',
+            'post_id',
+            'tag_id'
+        );
+        return $result;
     }
 }

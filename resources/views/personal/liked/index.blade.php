@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">Liked posts</h1>
                     </div>
                 </div>
             </div>
@@ -15,28 +15,45 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>111</h3>
-                                <p>Liked posts</p>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>View</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(count($posts) > 0)
+                                            @foreach ($posts as $post)
+                                                <tr>
+                                                    <td>{{ $post->title }}</td>
+                                                    <td>
+                                                        <a href="{{--{{ route('admin.post.show', ['post' => $post->id]) }}--}}"><i class="fas fa-eye"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('personal.liked.delete', ['post' => $post->id]) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button type="submit" class="border-0 bg-transparent">
+                                                                <i class="fas fa-trash text-danger" role="button"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="10">No data</td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <a href="{{--{{ route('personal.liked.index') }}--}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>111</h3>
-                                <p>Comments</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-comment"></i>
-                            </div>
-                            <a href="{{--{{ route('personal.comments.index') }}--}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>

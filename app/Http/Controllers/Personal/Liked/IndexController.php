@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Personal\Main;
+namespace App\Http\Controllers\Personal\Liked;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\Tag;
-use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -15,16 +11,13 @@ class IndexController extends Controller
 {
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        /*$data = [];
-        $data['usersCount'] = User::all()->count();
-        $data['postsCount'] = Post::all()->count();
-        $data['categoriesCount'] = Category::all()->count();
-        $data['tagsCount'] = Tag::all()->count();
+        // auth() - get users ID
+        // user() - get user data
+        // likedPosts - collection
+        $posts = auth()->user()->likedPosts;
 
-        return view('personal/main/index', [
-            'data' => $data,
-        ]);*/
-
-        return view('personal/main/index');
+        return view('personal/liked/index', [
+            'posts' => $posts,
+        ]);
     }
 }

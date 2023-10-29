@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-    @include('admin/includes/sidebar')
+    @include('personal/includes/sidebar')
 
     @yield('content')
 
@@ -72,7 +72,6 @@
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
-                //['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']],
             ],
         });

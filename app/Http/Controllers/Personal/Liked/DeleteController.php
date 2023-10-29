@@ -3,18 +3,25 @@
 namespace App\Http\Controllers\Personal\Liked;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
-class IndexController extends Controller
+class DeleteController extends Controller
 {
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(Post $post): RedirectResponse
     {
-        $posts = auth()->user()->likedPosts;
+        // auth() - get users ID
+        // user() - get user data
+        if (!empty(auth()->user()->id)) {
+            $userId = auth()->user()->id;
 
-        return view('personal/liked/index', [
-            'posts' => $posts,
-        ]);
+            DB::table('user_post_likes')
+                ->where('user_id', $userId)
+                ->where('post_id', $post->id)
+                ->delete();
+        }
+
+        return redirect()->route('personal.liked.index');
     }
 }
