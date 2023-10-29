@@ -22,8 +22,8 @@ return new class extends Migration
             $table->index('tag_id', 'post_tag_tag_idx');
 
             // Foreign key
-            $table->foreign('post_id', 'post_tag_post_fk')->references('id')->on('posts');
-            $table->foreign('tag_id', 'post_tag_tag_fk')->references('id')->on('tags');
+            $table->foreign('post_id', 'post_tag_post_fk')->references('id')->on('posts')->cascadeOnDelete();
+            $table->foreign('tag_id', 'post_tag_tag_fk')->references('id')->on('tags')->cascadeOnDelete();
         });
     }
 

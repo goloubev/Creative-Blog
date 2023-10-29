@@ -18,12 +18,12 @@ return new class extends Migration
             $table->timestamps();
 
             // Index
-            $table->index('user_id', 'pul_user_idx');
-            $table->index('post_id', 'pul_post_idx');
+            $table->index('user_id', 'user_post_likes_user_idx');
+            $table->index('post_id', 'user_post_likes_post_idx');
 
             // Foreign key
-            $table->foreign('user_id', 'pul_user_fk')->references('id')->on('users');
-            $table->foreign('post_id', 'pul_post_fk')->references('id')->on('posts');
+            $table->foreign('user_id', 'user_post_likes_user_fk')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('post_id', 'user_post_likes_post_fk')->references('id')->on('posts')->cascadeOnDelete();
         });
     }
 

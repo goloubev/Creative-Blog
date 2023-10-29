@@ -11,6 +11,7 @@ class DeleteController extends Controller
     public function index(Tag $tag): RedirectResponse
     {
         $tag->delete();
+
         return redirect()->route('admin.tag.index')->with('success', 'Successfully deleted');
     }
 }

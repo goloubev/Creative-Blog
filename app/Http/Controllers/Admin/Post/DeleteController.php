@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Post;
 
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 
 class DeleteController extends BaseController
 {

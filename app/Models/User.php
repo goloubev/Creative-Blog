@@ -6,7 +6,8 @@ use App\Notifications\SendVerifyWithQueueNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -17,7 +18,8 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
+    //use SoftDeletes;
 
     const ROLE_ADMIN = 0;
     const ROLE_READER = 1;
@@ -65,6 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function likedPosts(): BelongsToMany
     {
+        // belongsToMany : MANY to MANY
         // From USERS to POSTS
         // Table: user_post_likes
         // user_id -> post_id
@@ -73,6 +76,20 @@ class User extends Authenticatable implements MustVerifyEmail
             'user_post_likes',
             'user_id',
             'post_id'
+        );
+        return $result;
+    }
+
+    public function comments(): HasMany
+    {
+        // hasMany : ONE to MANY
+        // From USERS to POSTS
+        // Table: user_post_likes
+        // user_id -> post_id
+        $result = $this->hasMany(
+            Comment::class,
+            'user_id',
+            'id'
         );
         return $result;
     }
