@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::group(['namespace' => 'Main'], function() {
-    Route::get('/',
-        [App\Http\Controllers\Main\IndexController::class, 'index']
-    );
+    Route::get('/', [App\Http\Controllers\Main\IndexController::class, 'index'])
+        ->name('main.index');
 });
 
 //-------------------------------------------------------------------------

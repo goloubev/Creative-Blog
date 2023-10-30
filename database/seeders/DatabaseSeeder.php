@@ -19,22 +19,27 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $faker = app(Generator::class);
+        $imageIds = range(1, 9);
 
-        // Create 3 categories
+        // Create categories
         $categoryIds = [];
         for ($i = 0; $i < 3; $i++) {
             $categoryIds[] = Category::factory()->create()->id;
         }
 
-        // Create 10 tags
-        $tags = Tag::factory(10)->create();
+        // Create tags
+        $tags = Tag::factory(20)->create();
         $tagIds = $tags->pluck('id');
 
         foreach ($categoryIds as $categoryId) {
-            // Create 5 posts
-            for ($i = 0; $i < 5; $i++) {
+            // Create posts
+            for ($i = 0; $i < 3; $i++) {
+                $imageId = array_shift($imageIds);
+
                 $post = Post::factory()->create([
                     'category_id' => $categoryId,
+                    'preview_image' => 'images/'.$imageId.'_small.jpg',
+                    'main_image' => 'images/'.$imageId.'_big.jpg',
                 ]);
                 // Add tags to each post
                 $randomTagIds = $tagIds->random(2);
@@ -69,7 +74,7 @@ class DatabaseSeeder extends Seeder
         }*/
 
         // Posts likes
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 1; $i < 6; $i++) {
             DB::table('user_post_likes')->insert([
                 'user_id' => $mainUser->id,
                 'post_id' => $i,
@@ -78,7 +83,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Posts comments
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 1; $i < 6; $i++) {
             DB::table('comments')->insert([
                 'user_id' => $mainUser->id,
                 'post_id' => $i,
