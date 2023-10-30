@@ -74,9 +74,17 @@ class DatabaseSeeder extends Seeder
         }*/
 
         // Posts likes
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             DB::table('user_post_likes')->insert([
                 'user_id' => $mainUser->id,
+                'post_id' => $i,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+
+        for ($i = 1; $i <= 3; $i++) {
+            DB::table('user_post_likes')->insert([
+                'user_id' => '2',
                 'post_id' => $i,
                 'created_at' => Carbon::now(),
             ]);

@@ -4,20 +4,27 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 
-class IndexController extends Controller
+class ShowController extends Controller
 {
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(Post $post): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $posts = Post::paginate(6);
-        $likedPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'desc')->get()->take(3);
+        $postDate = Carbon::parse($post->created_at)->format('j F Y, H:i');
+        $commentsCount = $post->comments->count();
+        $relatedPosts = Post::where('category_id', $post->category_id)
+            ->where('id', '!=', $post->id)
+            ->get()
+            ->take(3);
 
-        return view('post/index', [
-            'posts' => $posts,
-            'likedPosts' => $likedPosts,
+        return view('post/show', [
+            'post' => $post,
+            'postDate' => $postDate,
+            'commentsCount' => $commentsCount,
+            'relatedPosts' => $relatedPosts,
         ]);
     }
 }

@@ -4,15 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static create(mixed $data)
  * @method static firstOrCreate($data)
+ * @method static paginate(int $int)
+ * @method static get()
+ * @method static withCount(string $string)
+ * @method static where(string $string, mixed $category_id)
  * @property mixed $id
  * @property mixed $preview_image
  * @property mixed $main_image
+ * @property mixed $created_at
+ * @property mixed $comments
+ * @property mixed $category_id
  */
 class Post extends Model
 {
@@ -38,4 +48,36 @@ class Post extends Model
         );
         return $result;
     }
+
+    public function category(): BelongsTo
+    {
+        $result = $this->belongsTo(
+            Category::class,
+            'category_id',
+            'id'
+        );
+        return $result;
+    }
+
+    public function likedUsers(): BelongsToMany
+    {
+        $result = $this->belongsToMany(
+            User::class,
+            'user_post_likes',
+            'post_id',
+            'user_id'
+        );
+        return $result;
+    }
+
+    public function comments(): HasMany
+    {
+        $result = $this->hasMany(
+            Comment::class,
+            'post_id',
+            'id'
+        );
+        return $result;
+    }
+
 }

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Local (C:\www\cutcode_shop\public\app\Models\User.php - $fillable)
         Model::preventSilentlyDiscardingAttributes(! app()->isProduction());
+
+        Paginator::useBootstrapFour();
     }
 }
