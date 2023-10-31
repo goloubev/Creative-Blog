@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property mixed $id
  * @method static create(mixed $data)
+ * @method static where(string $string, $user_id)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -57,6 +58,13 @@ class User extends Authenticatable implements MustVerifyEmail
         $roles = self::getRoles();
 
         return $roles[$role_id];
+    }
+
+    public static function getUserName($user_id)
+    {
+        $result = User::where('id', $user_id)->value('name');
+
+        return $result;
     }
 
     // Override sending emails

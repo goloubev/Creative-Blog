@@ -1,5 +1,7 @@
 @php
     use App\Models\Category;
+    use App\Models\User;
+	use Carbon\Carbon;
 @endphp
 
 @extends('layouts/main')
@@ -8,13 +10,18 @@
     <main class="blog-post">
         <div class="container">
             <h1 class="edica-page-title">{{ $post->title }}</h1>
+
             <p class="edica-blog-post-meta">
-                {{ $postDate }}
-                - {{ $commentsCount }} {{ $commentsCount > 1 ? 'comments' : 'comment' }}
+                {{ $postDate }} - {{ $commentsCount }} {{ $commentsCount > 1 ? 'comments' : 'comment' }}
             </p>
+
+            <x-topsuccess/>
+            <x-toperrors/>
+
             <section class="blog-post-featured-img">
                 <img src="{{ Storage::url($post->main_image) }}" alt="featured image" class="w-100">
             </section>
+
             <section class="post-content">
                 <div class="row">
                     <div class="col-lg-9 mx-auto">
@@ -22,63 +29,73 @@
                     </div>
                 </div>
             </section>
-            <div class="row">
-                <div class="col-lg-9 mx-auto">
-                    <section class="comment-section">
-                        <h2 class="section-title mb-5">Leave a reply</h2>
-                        <form action="/" method="post">
-                            <div class="row">
-                                <div class="form-group col-12">
-                                    <label for="comment" class="sr-only">Comment</label>
-                                    <textarea name="comment" id="comment" class="form-control" placeholder="Comment" rows="10">Comment</textarea>
-                                </div>
-                            </div>
-                            {{--<div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="name" class="sr-only">Name</label>
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name*">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="email" class="sr-only">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                           placeholder="Email*" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="website" class="sr-only">Website</label>
-                                    <input type="url" name="website" id="website" class="form-control"
-                                           placeholder="Website*">
-                                </div>
-                            </div>--}}
-                            <div class="row">
-                                <div class="col-12">
-                                    <input type="submit" value="Send Message" class="btn btn-warning">
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-lg-9 mx-auto">
                     <section class="related-posts">
                         <h2 class="section-title mb-4">Related posts</h2>
                         <div class="row">
-                            @foreach($relatedPosts as $post)
+                            @foreach($relatedPosts as $relatedPost)
                                 <div class="col-md-4">
-                                    <a href="{{ route('post.show', $post->id) }}">
-                                        <img src="{{ Storage::url($post->preview_image) }}" alt="related post" class="post-thumbnail" />
+                                    <a href="{{ route('post.show', $relatedPost->id) }}">
+                                        <img src="{{ Storage::url($relatedPost->preview_image) }}" alt="related post"
+                                             class="post-thumbnail"/>
                                     </a>
-                                    <p class="post-category">{{ Category::getCategoryName($post->category_id) }}</p>
-                                    <h5 class="post-title">{{ $post->title }}</h5>
+                                    <p class="post-category">{{ Category::getCategoryName($relatedPost->category_id) }}</p>
+                                    <h5 class="post-title">{{ $relatedPost->title }}</h5>
                                 </div>
                             @endforeach
                         </div>
                     </section>
-
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-9 mx-auto">
+                    @if($post->comments->count() > 0)
+                        <h2 class="section-title mb-5">Comments ({{ $post->comments->count() }})</h2>
+
+                        <section class="comment-list mb-5">
+                            @foreach($post->comments as $comment)
+                                <div class="comment-text mb-5">
+                                    <span class="username">
+                                        <div>{{ User::getUserName($comment->user_id) }}</div>
+                                        <span class="text-muted float-right">
+                                            {{ $comment->createdDateAsCarbon }}
+                                        </span>
+                                    </span>
+                                    {{ $comment->message }}
+                                </div>
+                            @endforeach
+                        </section>
+                    @endif
+
+                    @auth()
+                        <section class="comment-section">
+                            <h2 class="section-title mb-5">Leave a comment</h2>
+
+                            <form action="{{ route('post.comment.store', $post->id) }}" method="post">
+                                @csrf
+
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label for="message" class="sr-only">Comment</label>
+                                        <textarea name="message" id="message" class="form-control" placeholder="Comment" rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="submit" value="Add you comment" class="btn btn-warning">
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
+                    @endauth
+                </div>
+            </div>
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
         </div>
     </main>
 @endsection

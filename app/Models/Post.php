@@ -37,6 +37,7 @@ class Post extends Model
 
     public function tags(): BelongsToMany
     {
+        // MANY to MANY
         // From POSTS to TAGS
         // Table: post_tags
         // post_id -> tag_id
@@ -51,6 +52,7 @@ class Post extends Model
 
     public function category(): BelongsTo
     {
+        // ONE to MANY
         $result = $this->belongsTo(
             Category::class,
             'category_id',
@@ -61,6 +63,7 @@ class Post extends Model
 
     public function likedUsers(): BelongsToMany
     {
+        // MANY to MANY
         $result = $this->belongsToMany(
             User::class,
             'user_post_likes',

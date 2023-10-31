@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Personal\Comment;
+namespace App\Http\Controllers\Post\Comment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\Comment\StoreRequest;
 use App\Models\Comment;
+use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 
-class DeleteController extends Controller
+class StoreController extends Controller
 {
-    public function index(Comment $comment): RedirectResponse
+    public function index(Post $post, StoreRequest $request): RedirectResponse
     {
-        /*// auth() - get users ID
-        // user() - get user data
-        if (!empty(auth()->user()->id)) {
-            $userId = auth()->user()->id;
+        if (isset(auth()->user()->id)) {
+            $data = $request->validated();
+            $data['user_id'] = auth()->user()->id;
+            $data['post_id'] = $post->id;
 
-            DB::table('comments')
-                ->where('id', $comment->id)
-                ->where('user_id', $userId)
-                ->delete();
-        }*/
+            Comment::create($data);
 
-        $comment->delete();
-
-        return redirect()->route('personal.comment.index')->with('success', 'Successfully deleted');
+            return redirect()->route('post.show', $post->id)->with('success', 'Comment is successfully added');
+        }
+        else {
+            return redirect()->route('post.show', $post->id);
+        }
     }
 }

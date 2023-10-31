@@ -17,6 +17,13 @@ Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
 
     Route::get('/{post}', [App\Http\Controllers\Post\ShowController::class, 'index'])
         ->name('post.show');
+
+    // Nested route
+    // post/10/comments
+    Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function() {
+        Route::post('/', [App\Http\Controllers\Post\Comment\StoreController::class, 'index'])
+            ->name('post.comment.store');
+    });
 });
 
 //-------------------------------------------------------------------------
