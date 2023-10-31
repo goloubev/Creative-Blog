@@ -35,6 +35,8 @@ class Post extends Model
     // Unlock for modification all SQL table fields
     protected $guarded = false;
 
+    protected $withCount = ['likedUsers'];
+
     public function tags(): BelongsToMany
     {
         // MANY to MANY

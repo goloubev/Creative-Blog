@@ -1,7 +1,6 @@
 @php
     use App\Models\Category;
     use App\Models\User;
-	use Carbon\Carbon;
 @endphp
 
 @extends('layouts/main')
@@ -10,6 +9,26 @@
     <main class="blog-post">
         <div class="container">
             <h1 class="edica-page-title">{{ $post->title }}</h1>
+
+            @auth()
+                <form method="post" action="{{ route('post.like.store', $post->id) }}">
+                    @csrf
+
+                    <button type="submit" class="btn btn-default btn-sm" style="border-color:#948c8c;">
+                        @if(auth()->user()->likedPosts->contains($post->id))
+                            <i class="fas fa-thumbs-up"></i> Like
+                        @else
+                            <i class="far fa-thumbs-up"></i> Like
+                        @endif
+                    </button>
+
+                    {{ $post->liked_users_count }} likes
+                </form>
+            @endauth
+
+            @guest()
+                {{ $post->liked_users_count }} likes
+            @endguest
 
             <p class="edica-blog-post-meta">
                 {{ $postDate }} - {{ $commentsCount }} {{ $commentsCount > 1 ? 'comments' : 'comment' }}
@@ -30,25 +49,27 @@
                 </div>
             </section>
 
-            <div class="row">
-                <div class="col-lg-9 mx-auto">
-                    <section class="related-posts">
-                        <h2 class="section-title mb-4">Related posts</h2>
-                        <div class="row">
-                            @foreach($relatedPosts as $relatedPost)
-                                <div class="col-md-4">
-                                    <a href="{{ route('post.show', $relatedPost->id) }}">
-                                        <img src="{{ Storage::url($relatedPost->preview_image) }}" alt="related post"
-                                             class="post-thumbnail"/>
-                                    </a>
-                                    <p class="post-category">{{ Category::getCategoryName($relatedPost->category_id) }}</p>
-                                    <h5 class="post-title">{{ $relatedPost->title }}</h5>
-                                </div>
-                            @endforeach
-                        </div>
-                    </section>
+            @if($relatedPosts->count() > 0)
+                <div class="row">
+                    <div class="col-lg-9 mx-auto">
+                        <section class="related-posts">
+                            <h2 class="section-title mb-4">Related posts</h2>
+                            <div class="row">
+                                @foreach($relatedPosts as $relatedPost)
+                                    <div class="col-md-4">
+                                        <a href="{{ route('post.show', $relatedPost->id) }}">
+                                            <img src="{{ Storage::url($relatedPost->preview_image) }}" alt="related post"
+                                                 class="post-thumbnail"/>
+                                        </a>
+                                        <p class="post-category">{{ Category::getCategoryName($relatedPost->category_id) }}</p>
+                                        <h5 class="post-title">{{ $relatedPost->title }}</h5>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </section>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="row">
                 <div class="col-lg-9 mx-auto">

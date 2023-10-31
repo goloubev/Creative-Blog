@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -27,5 +29,15 @@ class Category extends Model
         $category = Category::where('id', $category_id)->first();
 
         return $category->title;
+    }
+
+    public function posts(): HasMany
+    {
+        $result = $this->hasMany(
+            Post::class,
+            'category_id',
+            'id'
+        );
+        return $result;
     }
 }

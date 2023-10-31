@@ -11,6 +11,18 @@ Route::group(['namespace' => 'Main'], function() {
         ->name('main.index');
 });
 
+Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
+    Route::get('/', [App\Http\Controllers\Category\IndexController::class, 'index'])
+        ->name('category.index');
+
+    // Nested route
+    // post/10/likes
+    Route::group(['namespace' => 'Post', 'prefix' => '{category}/posts'], function() {
+        Route::get('/', [App\Http\Controllers\Category\Post\IndexController::class, 'index'])
+            ->name('category.post.index');
+    });
+});
+
 Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
     Route::get('/', [App\Http\Controllers\Post\IndexController::class, 'index'])
         ->name('post.index');
@@ -23,6 +35,13 @@ Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
     Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function() {
         Route::post('/', [App\Http\Controllers\Post\Comment\StoreController::class, 'index'])
             ->name('post.comment.store');
+    });
+
+    // Nested route
+    // post/10/likes
+    Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function() {
+        Route::post('/', [App\Http\Controllers\Post\Like\StoreController::class, 'index'])
+            ->name('post.like.store');
     });
 });
 

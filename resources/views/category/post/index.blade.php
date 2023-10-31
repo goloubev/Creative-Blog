@@ -10,25 +10,6 @@
             <h1 class="edica-page-title">Blog</h1>
 
             <section class="featured-posts-section">
-                @if($likedPosts->count() > 0)
-                    <div class="widget widget-post-list">
-                        <h5 class="widget-title">Popular posts</h5>
-
-                        <ul class="post-list">
-                            @foreach($likedPosts as $post)
-                                <li class="post">
-                                    <a href="{{ route('post.show', $post->id) }}" class="post-permalink media">
-                                        <img src="{{ Storage::url($post->preview_image) }}" alt="blog post">
-                                        <div class="media-body">
-                                            <h6 class="post-title">{{ $post->title }}</h6>
-                                        </div>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 @if($posts->count() > 0)
                     <div class="row">
                         @foreach($posts as $post)

@@ -1,14 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Main;
+namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Category;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 
 class IndexController extends Controller
 {
-    public function index(): RedirectResponse
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return redirect()->route('post.index');
+        $categories = Category::all();
+
+        return view('category.index', [
+            'categories' => $categories,
+        ]);
     }
 }

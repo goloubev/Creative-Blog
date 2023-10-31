@@ -1,4 +1,7 @@
-@php use App\Models\Category; @endphp
+@php
+    use App\Models\Category;
+@endphp
+
 @extends('layouts/main')
 
 @section('content')
@@ -9,6 +12,7 @@
             <section class="featured-posts-section">
                 <div class="widget widget-post-list">
                     <h5 class="widget-title">Popular posts</h5>
+
                     <ul class="post-list">
                         @foreach($likedPosts as $post)
                             <li class="post">
@@ -24,7 +28,7 @@
                 </div>
                 <div class="row">
                     @foreach($posts as $post)
-                        <div class="col-md-4 fetured-post blog-post">
+                        <div class="col-md-4 blog-post">
                             <div class="blog-post-thumbnail-wrapper">
                                 <img src="{{ Storage::url($post->preview_image) }}" alt="blog post">
                             </div>
