@@ -12,7 +12,8 @@ class IndexController extends Controller
 {
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $posts = Post::paginate(6);
+        // with : \app\Models\Post.php
+        $posts = Post::with('category')->paginate(6);
         $likedPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'desc')->get()->take(3);
 
         return view('post/index', [
