@@ -10,12 +10,19 @@ class UserFactoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public UserFactory $factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = UserFactory::new();
+    }
+
     public function testUserFactory()
     {
-        $factory = UserFactory::new();
-
         // Generate attributes
-        $attributes = $factory->definition();
+        $attributes = $this->factory->definition();
 
         // Check generated attributes
         $this->assertArrayHasKey('name', $attributes);

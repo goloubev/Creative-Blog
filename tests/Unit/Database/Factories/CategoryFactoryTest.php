@@ -10,10 +10,19 @@ class CategoryFactoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public CategoryFactory $factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = CategoryFactory::new();
+    }
+
     public function testCategoryFactory()
     {
         // Generate attributes
-        $attributes = CategoryFactory::new()->definition();
+        $attributes = $this->factory->definition();
 
         // Check generated attributes
         $this->assertArrayHasKey('title', $attributes);

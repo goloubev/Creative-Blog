@@ -10,10 +10,19 @@ class TagFactoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_example(): void
+    public TagFactory $factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = TagFactory::new();
+    }
+
+    public function testTagFactory()
     {
         // Generate attributes
-        $attributes = TagFactory::new()->definition();
+        $attributes = $this->factory->definition();
 
         // Check generated attributes
         $this->assertArrayHasKey('title', $attributes);

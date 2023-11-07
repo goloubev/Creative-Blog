@@ -10,10 +10,19 @@ class PostFactoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public PostFactory $factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = PostFactory::new();
+    }
+
     public function testPostFactory()
     {
         // Generate attributes
-        $attributes = PostFactory::new()->definition();
+        $attributes = $this->factory->definition();
 
         // Check generated attributes
         $this->assertArrayHasKey('title', $attributes);
