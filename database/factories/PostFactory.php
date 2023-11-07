@@ -13,6 +13,8 @@ class PostFactory extends Factory
             'title' => ucfirst(fake()->words(5, true)),
             'content' => '<p>' . implode('</p><p>', fake()->paragraphs(6)) . '</p>',
             'category_id' => Category::factory(),
+            'preview_image' => '',
+            'main_image' => '',
         ];
     }
 }
