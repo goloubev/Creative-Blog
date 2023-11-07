@@ -18,8 +18,9 @@ class PostsTableSeeder extends Seeder
 
         $categories = Category::all();
         $categoryIds = $categories->pluck('id');
+        $categoryIdsCount = count($categoryIds);
 
-        $imageIds = range(1, (count($categoryIds) * MAX_POSTS_BY_CATEGORY));
+        $imageIds = range(1, ($categoryIdsCount * MAX_POSTS_BY_CATEGORY));
 
         foreach ($categoryIds as $categoryId) {
             for ($i = 0; $i < MAX_POSTS_BY_CATEGORY; $i++) {
