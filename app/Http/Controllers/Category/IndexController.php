@@ -10,7 +10,7 @@ use Illuminate\Foundation\Application;
 
 class IndexController extends Controller
 {
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(): View
     {
         $categories = Category::all();
 
