@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Personal\Comment;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 
 class DeleteController extends Controller
 {

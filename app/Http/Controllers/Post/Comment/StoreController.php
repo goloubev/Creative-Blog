@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\Comment\StoreRequest;
 use App\Models\Comment;
 use App\Models\Post;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 
 class StoreController extends Controller
