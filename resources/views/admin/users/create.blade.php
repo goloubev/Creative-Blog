@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
+                                <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
                                 <x-error name="email" />
                             </div>
                             <div class="form-group">

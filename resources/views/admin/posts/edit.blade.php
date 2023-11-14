@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Content</label>
-                                <textarea name="content" id="summernote">{{ $post->content ?? old('content') }}</textarea>
+                                <textarea name="content" class="summernote">{{ $post->content ?? old('content') }}</textarea>
                                 <x-error name="content" />
                             </div>
                             <div class="form-group">
