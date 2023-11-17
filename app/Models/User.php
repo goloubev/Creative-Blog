@@ -26,13 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
     const ROLE_ADMIN = 0;
     const ROLE_READER = 1;
 
-    // The attributes that are mass assignable
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
-    ];
+    // Unlock for modification all SQL table fields
+    protected $guarded = false;
 
     // The attributes that should be hidden for serialization
     protected $hidden = [
